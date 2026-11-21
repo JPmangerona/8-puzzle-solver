@@ -31,3 +31,13 @@
 └── main.py
 ```
 
+## Notas de implementação
+
+- **Ações:** o nome indica para onde o **espaço vazio** se move (`"UP"` = o vazio sobe).
+- **Solubilidade:** `State.is_solvable` compara a paridade de inversões com a de `GOAL_STATE`; entradas insolúveis retornam `found=False` sem busca.
+- **Métricas:** `nodes_generated` = raiz + todos os filhos de `neighbors()` (inclui duplicatas); `nodes_expanded` = nós que tiveram filhos gerados.
+- **Teste de objetivo:** BFS/DFS testam na geração; A* testa ao retirar da fila (necessário para otimalidade).
+- **DFS:** guarda a menor profundidade de cada estado e o reabre por um caminho mais raso, para ser completa dentro de `depth_limit`.
+- **A\*:** Manhattan derivada de `GOAL_STATE`; reabre estados se achar `g` menor; desempate por `(f, h)`.
+- **Testes:** `pytest` (arquivo `tests/test_puzzle.py`).
+
